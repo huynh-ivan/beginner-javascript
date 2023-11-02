@@ -11,7 +11,8 @@ document.body.appendChild(div);
 // add three list items with the words "one, two, three" in them
 // put that list into the above wrapper
 
-const uList = `<ul>
+const uList = `
+    <ul>
       <li>one</li>
       <li>two</li>
       <li>three</li>
@@ -36,17 +37,45 @@ div.appendChild(img);
 
 // with HTML string, make a div, with two paragraphs inside of it
 // put this div before the unordered list from above
-
 // add a class to the second paragraph called warning
 // remove the first paragraph
 
-// create a function called generatePlayerCard that takes in three arguments: name, age, and height
+const div2 = `<div class = myDiv>
+        <p>P1</p>
+        <p>P2</p>
+</div>`;
 
+const uListElement = div.querySelector('ul');
+
+//uListElement.insertAdjacentElement('beforebegin',div2);
+uListElement.insertAdjacentHTML('beforebegin',div2);
+console.log(uListElement);
+
+const myDiv = div.querySelector('.myDiv');
+console.log(myDiv.children[1]);
+myDiv.children[1].classList.add('warning');
+
+myDiv.firstElementChild.remove();
+
+
+// create a function called generatePlayerCard that takes in three arguments: name, age, and height
 // have that function return html that looks like this:
 // <div class="playerCard">
 //   <h2>NAME — AGE</h2>
 //   <p>They are HEIGHT and AGE years old. In Dog years this person would be AGEINDOGYEARS. That would be a tall dog!</p>
 // </div>
+
+function generatePlayerCard(name, age, height) {
+    // const name = name;
+    // const age = age;
+    // const height = height;
+    const playerCard = `<div class="playerCard">
+        <h2> </h2>
+    </div>`
+    
+    return playerCard
+
+};
 
 // make a new div with a class of cards
 
