@@ -1,16 +1,25 @@
 // Make a div
+const div = document.createElement('div');
 
 // add a class of wrapper to it
+div.classList.add('wrapper');
 
 // put it into the body
+document.body.appendChild(div);
 
 // make an unordered list
-
 // add three list items with the words "one, two, three" in them
 // put that list into the above wrapper
 
-// create an image
+const uList = `<ul>
+      <li>one</li>
+      <li>two</li>
+      <li>three</li>
+    <ul>`;
 
+div.innerHTML = uList; // innerHTML is a method that takes one method and translates it into HTML// create an image
+
+console.log(div);
 // set the source to an image
 // set the width to 250
 // add a class of cute
