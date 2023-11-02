@@ -20,11 +20,19 @@ const uList = `<ul>
 div.innerHTML = uList; // innerHTML is a method that takes one method and translates it into HTML// create an image
 
 console.log(div);
+
+// create an image
+const img = document.createElement('img')
 // set the source to an image
+img.src = 'http://www.cutenessoverflow.com/wp-content/uploads/2014/02/Little-Cute-Puppy-1600x1200.jpg';
 // set the width to 250
+img.width = 250;
 // add a class of cute
+img.classList.add('cute');
 // add an alt of Cute Puppy
+img.alt = 'Cute Pupper!'
 // Append that image to the wrapper
+div.appendChild(img);
 
 // with HTML string, make a div, with two paragraphs inside of it
 // put this div before the unordered list from above
