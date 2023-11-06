@@ -3,17 +3,18 @@
   "version": "1.0.0",
   "description": "Starter Files and Solutions for the BeginnerJavaScript.com Course",
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wesbos/beginner-javascript.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wesbos/beginner-javascript/issues"
-  },
-  "homepage": "https://github.com/wesbos/beginner-javascript#readme",
-  "devDependencies": {
-    "prettier": "3.0.3"
+  "dependencies": {
+    "eslint-config-wesbos": "^3.2.3"
   }
 }

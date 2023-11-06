@@ -38,9 +38,9 @@
       <p>Testing 234!</p>
     </div>
   </div>
-  
+
   <style>
-    .cards { 
+    .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       grid-gap: 20px;
@@ -54,16 +54,18 @@
     }
 
     .card h2 {
+      /* Direct Child selector. Reads: any h2 that is a direct child of a .card element */
       color: black;
     }
 
     .card img {
+      /*Direct child selector. Reads: any img that is a direct child of a .card element*/
       width: 100%;
     }
 
     .modal-outer {
       display: grid;
-      background: hsla(35,100%,50%,0.7);
+      background: hsla(35, 100%, 50%, 0.7);
       position: fixed;
       height: 100vh;
       width: 100vw;
@@ -73,12 +75,20 @@
       align-items: center;
       /*Hide the modal until we need this*/
       opacity: 0;
-      pointer-events: none; /*Setting the value to none basically disables all mouse events*/
+      pointer-events: none;
+      /*Setting the value to none basically disables all mouse events*/
     }
 
-    .modal-outer.open { /*This is a child selector for CSS*/
+    .modal-outer img {
+      /*This is a child selector. This reads "for any img element that is the child of an element with the modal-outer class*/
+      width: 100%;
+    }
+
+    .modal-outer.open {
+      /*This is actually a selector chain. the .open class is chained to the element with the modal-outer class*/
       opacity: 1;
-      pointer-events: all; /*when the .open class is attached to this element, pointer events are enabled again*/
+      pointer-events: all;
+      /*when the .open class is attached to this element, pointer events are enabled again*/
       transition: opacity 0.2s;
     }
 
@@ -88,10 +98,19 @@
       min-height: 200px;
       background: white;
       padding: 2rem;
+      transform: translateY(-200%);
+      transition: transform 2s;
+    }
+
+    .modal-outer.open .modal-inner {
+      /*This is a selector chain AND a child element selector combined! */
+      /* Reads: select the element with .modal-inner class that itself 
+      is a child of the .modal-outer element that has the .open class attached */
+      transform: translateY(0);
     }
   </style>
-  
-  
+
+
   <script src="./click-outside.js"></script>
 </body>
 
