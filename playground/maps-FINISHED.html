@@ -11,17 +11,21 @@
 <body>
   <ul class="prizes"></ul>
   <script>
-    const person1 = {
+    const person1 = { //this is an object literal
       name: 'wes',
       age: 200
     };
 
-    const myMap = new Map();
-    // .set()
-    myMap.set('name', 'wes');
-    myMap.set(100, 'This is a number');
-    myMap.set(person1, 'Really Cool');
-    console.log(myMap);
+    // Dictionaries
+    // Allow us to store additional metadata about an object
+    // in case we want additional metadata, but don't want to store it on the object itself
+
+    const myMap = new Map(); // this is the syntax to declare a new map
+    // .set() - a method to add Entries into a map
+    myMap.set('name', 'wes'); // entries look like object properties (key:value)
+    myMap.set(100, 'This is a number'); // however, entries keys can be of any type like Number
+    myMap.set(person1, 'Really Cool'); // entry keys may also be objects
+    console.log(myMap); //The order of entries is guarenteed in the order they were set
 
     const score = 200;
     const prizes = new Map();
@@ -31,14 +35,18 @@
     console.log(`you win a ${prizes.get(score)}`);
 
     // select that ul
-    const ul = document.querySelector('.prizes');
-    for (const [points, prize] of prizes) {
+    const ul = document.querySelector('.prizes'); // select the ul in the boday that has the class prizes
+    for (const [points, prize] of prizes) { // for...of loops allow looping over maps
+      // the const [points, prizes] of prizes seems to be an example of destructuring the prizes Map
       const li = `<li>${points} - ${prize}</li>`;
       ul.insertAdjacentHTML('beforeend', li);
     }
     // .has()
     // .delete()
   </script>
+
+  <!-- Other thing to note about maps is that they are not supported in JSOn yet -->
+  <!-- It is possible to create a new map and pass it an array, in which each item in the array is also an array -->
 </body>
 
 </html>

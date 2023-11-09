@@ -10,6 +10,58 @@
 
 <body>
 
+
+
+  <script>
+    function buzzer() {
+      console.log('ERRRRRNGGGGGGGG')
+    }
+    // console.log('starting');
+    // setTimeout(buzzer, 500); // setTimeout() requires a callback + duration in milliseconds
+    // console.log('finished!');
+
+    // setInterval(buzzer, 100);
+
+    function setImmediateInterval(funcToRun, ms) { //note: functToRun here is a param
+      //Call the function immediately
+      funcToRun(); //the argument that's passed as the first param is invoked here using the ()
+      //Run a regular interval
+      return setInterval(funcToRun, ms); //the setInterval() method is returned 
+    }
+
+    setImmediateInterval(buzzer, 2000); //buzzer is passed as the param
+    //because it's a function, it's invoked immediately from line 27
+    // after being invoked immediated, it'll be invoked every 2 sec (2000ms)
+
+    function sayHi() {
+      console.log('heyyyy')
+    }
+    // setImmediateInterval(sayHi, 200);
+
+    function destroy() {
+      document.body.innerHTML = `<p>destroyed!</p>`;
+    }
+
+    const bombTimer = setTimeout(destroy, 5000); // setTimeout() is a method that takes a callback and duration
+    console.log(bombTimer);
+
+    window.addEventListener('click', function () {
+      console.log('something was clicked!')
+      // how do you stop the timer from runnning?
+      clearTimeout(bombTimer); // clearTimeout() is a method that only works when you pass it the original setTimeout()
+    })
+
+    const poopInterval = setInterval(function () {
+      console.log('💩');
+      console.log('Hehehe');
+    }, 100);
+
+    setTimeout(function () {
+      clearInterval(poopInterval); //clearInterval() also requires passing in the original setInterval()
+    }, 3000);
+
+
+  </script>
 </body>
 
 </html>

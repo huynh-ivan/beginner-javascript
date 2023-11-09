@@ -9,7 +9,38 @@
 </head>
 
 <body>
+  <!-- <input type="text" name="first" value="wes"> -->
   <script>
+    const person = { //object literals are declared with curly brackets
+      name: 'ivan', // individual properties follow the syntax key:value
+      age: 29,
+      propertyToCheck: 'BUUUBUBU', //values can be of any JS type
+      'cool-dude': true, // keys/names may include characters that are not normally allowed
+      '777': true, //property names/keys may have numbers
+      'other thing': false, // and spaces
+      dog: 'sniker',
+      clothing: { // objects can also be nested within objects
+        pants: 2, // this `pants` property can be accessed like person.clothing.pants
+        shirt: 1,
+      }
+    };
+
+    // person.job = 'design engineer'; // it is possible to add/set properties to objects outside the object literal
+    // console.log(person);
+
+    // const personFreeze = Object.freeze(person); // Object.freeze() preserves the properties of the referenced object
+
+    // console.log(person.age);
+    // const propertyToCheck = prompt('what should we check fo?'); //prompt returns whatever the input value is
+
+    // console.log(person[propertyToCheck]); // propertyToCheck is a variable that's passed in reference
+    // console.log(person.propertyToCheck); // this is a property named the same thing as the variable
+
+    const input = document.querySelector('[name = first]'); // here we are selecting the element where the name attribute equals first
+    console.log(input);
+
+    const name = input ? input.value : ''; // example of the tenerary operator
+    console.log(name);
 
   </script>
 </body>
