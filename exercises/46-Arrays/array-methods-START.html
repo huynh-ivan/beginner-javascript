@@ -45,12 +45,49 @@
     */
 
     // Array.of();
+    // Array.of() creates an array from the arguments that's passed to it
+    // Seems to be rarely used as it's easier to just type the array out
 
     // Make a function that creates a range from x to y with Array.from();
+    // According to MDN, Array.from() creates an array from an array-like thing
+    // In the below the { length : end - start + 1 } statement is an iterable (i.e. it has a length)
+    // Array.from() also takes a mapping function, which will call a the function on every item and return that output as the item in the enclosing array
+    function createRange(start, end) {
+      const range = Array.from({ length: end - start + 1 }, function (item, index) {
+        return index + start;
+      })
+      return range;
+    };
+
+    const myRange = createRange(3, 7);
 
     // Check if the last array you created is really an array with Array.isArray();
 
+    console.log(Array.isArray(myRange)); // this should return either true or false
+
     // Take the meats object and make three arrays with Object.entries(), Object.keys, Object.values()
+
+    console.log(Object.entries(meats)); // returns an array with the properties of the meats object as items in the array
+    console.log(Object.keys(meats)); // returns an array of the Object's property names as an array
+    console.log(Object.values(meats)); // returns an array of the Object's property valus as an array
+
+    Object.entries(meats).forEach(([key, value]) => {
+      // console.log(entry);
+      // const key = entry[0]; // Access via square bracket notation
+      // const value = entry[1]; 
+
+      // const [key, value] = entry; //Examples of destructuring
+      console.log(key, value);
+    }) // returns the meat object's properties as items in an array
+
+    // Object.keys(meats).forEach(qty => {
+    //   console.log(qty);
+    // }) // returns: beyond, beef, pork
+
+
+    // Object.values(meats).forEach(qty => {
+    //   console.log(qty);
+    // }) // 10, 5 , 7
 
     /*
       Instance Methods
@@ -58,38 +95,149 @@
 
     // Display all bun types with " or " - use join()
 
+    console.log(buns.join(' or ')) // Spaces should be included
+
     // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into a string
+    const foodString = "hot dogs,hamburgers,sausages,corn" // note: split() is actually a string method
+    foodString.split(',');
+    console.log(foodString.split(','));
+    // take the last item off toppings with pop() // pop() is a mutable method (changes the original array)
+    // add it back with push() // push() is also a mutable
+    const lastTopping = toppings.pop()
+    console.log(lastTopping);
 
-    // take the last item off toppings with pop()
-    // add it back with push()
+    toppings.push(lastTopping);
+    console.log(toppings);
+
     // take the first item off toppings with shift()
-    // add it back in with unshift()
-    // Do the last four,but immutable (with spreads and new variables)
+    const firstItem = toppings.shift() // shift() is mutable
 
+    // add it back in with unshift()
+    console.log(firstItem);
+    toppings.unshift(firstItem); // unshift is mutable
+    console.log(toppings);
+    // Do the last four, but immutable (with spreads and new variables)
+    console.log(toppings);
+
+    let newToppings = toppings.slice(0, toppings.length - 1);
+    newToppings = [...newToppings, toppings[toppings.length - 1]];
+
+    console.log(newToppings);
 
     // Make a copy of the toppings array with slice()
+
+    const toppingsCopy = toppings.slice(0); // slice() is immutable (returns a new array)
+    toppings[0] = 'mushy boi' // set index 0 of the array to mushy bui
+    console.log(toppings); // this is the original array
+    console.log(toppingsCopy); // this should be a new array
     // Make a copy of the toppings array with a spread
+
+    const toppingsCopy2 = [...toppings];
+    console.log(toppingsCopy2);
     // take out items 3 to 5 of your new toppings array with splice()
+
+    toppingsCopy2.splice(3, 5); // notice this is items 3-5, not index 3-5; splice is zero-based
+    console.log(toppingsCopy2);
     // find the index of Avocado with indexOf() / lastIndexOf()
+    const avoIndex = toppings.indexOf('Avocado'); // indexOf() and lastIndexOf() are both case-sensitive
+    console.log(avoIndex);
     // Check if hot sauce is in the toppings with includes()
     // add it if it's not
+    console.log(toppings.push('hot sauce'), toppings);
+
     // flip those toppings around with reverse()
+    const reversedToppings = [...toppings].reverse(); // creates a shallow copy of the toppings array first
+    console.log(toppings);
+    console.log(reversedToppings);
 
     /*
       Callback Methods
     */
 
     // find the first rating that talks about a burger with find()
+
+    // function findBurgRating(singleFeedback) { // function declaration
+    //   return singleFeedback.comment.includes('burg');
+    // }
+
+
+    // const findBugerRating = function(singleFeedback) { // function expression
+    //   return singleFeedback.comment.includes('burg');
+    // }
+
+
+    // const findBurgRating = singleFeedback => singleFeedback.comment.includes('burg'); // arrow function
+    // const findSmoothieRating = singleFeedback => singleFeedback.comment.includes('Smoothie');
+
+    function findByWord(word) { // this is an advanced technique called higher-order functions
+      return function (singleFeedback) { // these functions intake a param, and then returns a function
+        return singleFeedback.comment.includes(word); // this looks like a closure?
+      } // effectively, findByWord() intakes an argument, returns a function which itself returns whether the word was located in an item called singleFeedback
+      //singleFeedback is a param, but when called on the feedback array, it refers to an individual item in the array
+      // "for each item (i.e. each singleFeedback), look into the comment key, and find the the string. If found, return true, else, return false"
+    }
+    // console.log(feedback);
+    // const burgFinder = findByWord('burg');
+    const hazBurger = feedback.find(findByWord('burg'));
+    const hazSmoothie = feedback.find(findByWord('Smoothie'))
+    console.log(hazBurger);
+    console.log(hazSmoothie)
+
+
     // find all ratings that are above 2 with filter()
+    function filterByMinRatin(minRating) {
+      return function (singleFeedback) { // here again, singleFeedback refers to an item in the array it's called against
+        return singleFeedback.rating > minRating;
+      }
+    };
+
+    const goodReviews = feedback.filter(filterByMinRatin(4)); // a singleFeedback item here would be an item in the feedback array
+    console.table(goodReviews);
+
     // find all ratings that talk about a burger with filter()
+    const burgRatings = feedback.filter(findByWord('burg'));
+    console.table(burgRatings);
     // Remove the one star rating however you like!
 
+    const legitRatings = feedback.filter(single => single.rating !== 1) // here a simple arrow function is passed, rather than a function definition
+    console.table(legitRatings);
     // check if there is at least 5 of one type of meat with some()
+
+    const isThereAtLeastOneOfThisMeat = Object.values(meats).some(meatValue => meatValue >= 5); // function expressions
+    console.log(isThereAtLeastOneOfThisMeat); // function expressions separate the logic from the result that can be logged
+
     // make sure we have at least 3 of every meat with every()
+    const isThereEnoughOfTEveryMeat = Object.values(meats).every(meatValue => meatValue >= 5);
+    console.log(isThereAtLeastOneOfThisMeat);
     // sort the toppings alphabetically with sort()
+
+    const numbers = [1, 2, 100, 3, 200, 400, 155]
+    console.log(numbers);
+
+    const numbersSorted = numbers.sort((firstItem, secondItem) => firstItem - secondItem);
+    // firstItem + SecondItem refer to the first item and second items in the numbers array
+    // sort can take a comparison function, defaulting if A > B, A < B, or A === B
+    // if a - b is positive -> item A is right of item B (index position increases)
+    // if a - b is negative -> A is left of item B (index position decreases)
+    // if a - b is zero (index position same, moves on to the next item (b) in the array)
+    console.log(numbersSorted);
+
+    console.log(toppings.sort());
     // sort the order totals from most expensive to least with .sort()
+
+    function numberSort(a, b) {
+      return a - b;
+    }
+
+    console.log(orderTotals.sort(numberSort));
     // Sort the prices with sort()
 
+    const productsSortedByPrice = Object.entries(prices).sort(function (a, b) {
+      const aPrice = a[1];
+      const bPrice = b[1];
+      return aPrice - bPrice;
+    })
+    console.log(Object.fromEntries(productsSortedByPrice));
     /*
       Looping Methods (next)
     */
